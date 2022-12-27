@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Колоножка")
+                    Greeting("Some Name")
                 }
             }
         }
@@ -31,13 +31,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String) {
-    Text(text = "I wanna fuck $name in the ass!")
+    Text(text = name)
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     FoodTrackerAppTheme {
-        Greeting("Колоножка")
+        Greeting("name")
     }
 }
