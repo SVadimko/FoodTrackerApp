@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.vadimko.core.navigation.Route
 import com.vadimko.foodtrackerapp.navigation.navigate
 import com.vadimko.foodtrackerapp.ui.theme.FoodTrackerAppTheme
+import com.vadimko.onboarding_presentation.welcome.TempAgeScreen
 import com.vadimko.onboarding_presentation.welcome.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
                             WelcomeScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.AGE) {
-
+                            TempAgeScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.GENDER) {
 
