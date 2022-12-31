@@ -71,7 +71,7 @@ dependencies {
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)
-    implementation(AndroidX.vmLifeCycle)
+    //implementation(AndroidX.vmLifeCycle)
 
     implementation(Coil.coilCompose)
 

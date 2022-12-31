@@ -5,6 +5,6 @@ object AndroidX {
     private const val appCompatVersion = "1.4.0"
     const val appCompat = "androidx.appcompat:appcompat:$appCompatVersion"
 
-    private const val lifecycle_version = "2.4.0"
-    const val vmLifeCycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
+//    private const val lifecycle_version = "2.4.0"
+//    const val vmLifeCycle = "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
 }
