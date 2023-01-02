@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import com.vadimko.core.data.preferences.DefaultPreferences
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.domain.usecase.FilterOutDigits
+import com.vadimko.core.domain.usecase.FilterOutFloatDigits
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,6 +33,12 @@ object AppModule {
     @Singleton
     fun providesFilterOutDigitsUseCase(): FilterOutDigits{
         return FilterOutDigits()
+    }
+
+    @Provides
+    @Singleton
+    fun providesFilterOutFloatDigitsUseCase(): FilterOutFloatDigits {
+        return FilterOutFloatDigits()
     }
 
 }

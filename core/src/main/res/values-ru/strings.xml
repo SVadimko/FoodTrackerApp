@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">FoodTrackerApp</string>
     <string name="error_unknown">Unknown error</string>
-    <string name="welcome_text">Превед :)</string>
+    <string name="welcome_text">Hello! Let\'s find out more about you :)</string>
     <string name="lets_go">Let\'s go</string>
     <string name="whats_your_gender">What is your gender?</string>
     <string name="male">Male</string>
@@ -55,7 +55,7 @@
     <string name="lose">Lose</string>
     <string name="lose_keep_or_gain_weight">Do you want to lose, keep or gain weight?</string>
     <string name="whats_your_activity_level">What\'s your activity level?</string>
-    <string name="error_not_100_percent">The values must add up to 100%</string>
+    <string name="error_not_100_percent">The values must add up to 100%. Your current sum is</string>
     <string name="your_goal">Your goal:</string>
     <string name="delete">Delete</string>
 </resources>

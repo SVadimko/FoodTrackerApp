@@ -1,11 +1,13 @@
-package com.vadimko.onboarding_presentation.gender
+package com.vadimko.onboarding_presentation.goal
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vadimko.core.domain.model.ActivityLevel
 import com.vadimko.core.domain.model.Gender
+import com.vadimko.core.domain.model.GoalType
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
@@ -16,24 +18,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GenderScreenVM @Inject constructor(
+class GoalScreenVM @Inject constructor(
     private val prefs: Preferences
 ) : ViewModel() {
 
-    var selectedGender by mutableStateOf<Gender>(Gender.Male)
+    var selectedGoal by mutableStateOf<GoalType>(GoalType.KeepWeight)
         private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onGenderClick(gender: Gender) {
-        selectedGender = gender
+    fun onGoalClick(goal: GoalType) {
+        selectedGoal = goal
     }
 
     fun onNextClick() {
         viewModelScope.launch {
-            prefs.saveGender(selectedGender)
-            _uiEvent.send(UiEvent.Navigate(Route.AGE))
+            prefs.saveGoalType(selectedGoal)
+            _uiEvent.send(UiEvent.Navigate(Route.NUTRIENT_GOAL))
         }
     }
 }

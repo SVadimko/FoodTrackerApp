@@ -1,10 +1,11 @@
-package com.vadimko.onboarding_presentation.gender
+package com.vadimko.onboarding_presentation.avtivity
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.vadimko.core.domain.model.ActivityLevel
 import com.vadimko.core.domain.model.Gender
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.navigation.Route
@@ -16,24 +17,24 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class GenderScreenVM @Inject constructor(
+class ActivityScreenVM @Inject constructor(
     private val prefs: Preferences
 ) : ViewModel() {
 
-    var selectedGender by mutableStateOf<Gender>(Gender.Male)
+    var selectedActivity by mutableStateOf<ActivityLevel>(ActivityLevel.Medium)
         private set
 
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
-    fun onGenderClick(gender: Gender) {
-        selectedGender = gender
+    fun onActivityClick(activity: ActivityLevel) {
+        selectedActivity = activity
     }
 
     fun onNextClick() {
         viewModelScope.launch {
-            prefs.saveGender(selectedGender)
-            _uiEvent.send(UiEvent.Navigate(Route.AGE))
+            prefs.saveActivityLevel(selectedActivity)
+            _uiEvent.send(UiEvent.Navigate(Route.GOAL))
         }
     }
 }
