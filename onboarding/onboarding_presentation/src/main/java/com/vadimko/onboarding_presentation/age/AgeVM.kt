@@ -10,6 +10,7 @@ import com.vadimko.core.domain.usecase.FilterOutDigits
 import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
+import com.vadimko.onboarding_domain.usecase.ValidateAge
 import com.vadimko.onboarding_presentation.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -20,7 +21,8 @@ import javax.inject.Inject
 @HiltViewModel
 class AgeVM @Inject constructor(
     private val prefs: Preferences,
-    private val filterOutDigits: FilterOutDigits
+    private val filterOutDigits: FilterOutDigits,
+    private val validateAge: ValidateAge,
 ) : ViewModel() {
 
     var age by mutableStateOf("20")
@@ -31,7 +33,8 @@ class AgeVM @Inject constructor(
 
     fun onAgeEnter(age: String) {
         if (age.length <= 3) {
-            this.age = filterOutDigits(age)
+            //this.age = filterOutDigits(age)
+            this.age = validateAge(age)
         }
     }
 

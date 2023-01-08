@@ -10,6 +10,8 @@ import com.vadimko.core.domain.usecase.FilterOutDigits
 import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
+import com.vadimko.onboarding_domain.di.OnboardingDomainModule.OnboardingPresentation.providesValidateHeightUseCase
+import com.vadimko.onboarding_domain.usecase.ValidateHeight
 import com.vadimko.onboarding_presentation.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -21,7 +23,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HeightVM @Inject constructor(
     private val prefs: Preferences,
-    private val filterOutDigits: FilterOutDigits
+    private val filterOutDigits: FilterOutDigits,
+    private val validateHeight: ValidateHeight,
 ) : ViewModel() {
 
     var height by mutableStateOf("175")
@@ -32,7 +35,8 @@ class HeightVM @Inject constructor(
 
     fun onHeightEnter(height: String) {
         if (height.length <= 3) {
-            this.height = filterOutDigits(height)
+          //  this.height = filterOutDigits(height)
+            this.height = validateHeight(height)
         }
     }
 

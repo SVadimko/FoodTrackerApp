@@ -1,6 +1,9 @@
 package com.vadimko.onboarding_domain.di
 
+import com.vadimko.onboarding_domain.usecase.ValidateAge
+import com.vadimko.onboarding_domain.usecase.ValidateHeight
 import com.vadimko.onboarding_domain.usecase.ValidateNutrients
+import com.vadimko.onboarding_domain.usecase.ValidateWeight
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,6 +22,24 @@ object OnboardingDomainModule {
         @ViewModelScoped
         fun providesValidateNutrientsUseCase(): ValidateNutrients {
             return ValidateNutrients()
+        }
+
+        @Provides
+        @ViewModelScoped
+        fun providesValidateAgeUseCase(): ValidateAge {
+            return ValidateAge()
+        }
+
+        @Provides
+        @ViewModelScoped
+        fun providesValidateHeightUseCase(): ValidateHeight {
+            return ValidateHeight()
+        }
+
+        @Provides
+        @ViewModelScoped
+        fun providesValidateWeightUseCase(): ValidateWeight {
+            return ValidateWeight()
         }
     }
 }

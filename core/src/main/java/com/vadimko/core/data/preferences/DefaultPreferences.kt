@@ -14,6 +14,7 @@ import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_GENDER
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_GOAL
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_HEIGHT
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_PROTEIN_RATIO
+import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_SHOULD_SHOW_ONBOARDING
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_WEIGHT
 
 class DefaultPreferences(
@@ -98,6 +99,15 @@ class DefaultPreferences(
 
     }
 
+    override fun saveShouldShowOnboarding(shouldShow: Boolean) {
+      sharedPrefs.edit()
+          .putBoolean(KEY_SHOULD_SHOW_ONBOARDING, shouldShow)
+          .apply()
+    }
+
+    override fun loadShouldShowOnboarding(): Boolean {
+       return sharedPrefs.getBoolean(KEY_SHOULD_SHOW_ONBOARDING, true)
+    }
 
 
 }
