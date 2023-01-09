@@ -9,6 +9,7 @@ import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.tracker_domain.use_case.TrackerUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.launchIn
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class TrackerOverviewVM @Inject constructor(
     preferences: Preferences,
     private val trackerUseCase: TrackerUseCase,

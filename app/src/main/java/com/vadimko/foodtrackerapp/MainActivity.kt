@@ -24,7 +24,7 @@ import com.vadimko.onboarding_presentation.height.HeightScreen
 import com.vadimko.onboarding_presentation.nutrition.NutritionScreen
 import com.vadimko.onboarding_presentation.weight.WeightScreen
 import com.vadimko.onboarding_presentation.welcome.WelcomeScreen
-import com.vadimko.tracker_presentation.temp.TempScreen
+import com.vadimko.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -83,7 +83,7 @@ class MainActivity : ComponentActivity() {
                             ActivityScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.TRACKER_OVERVIEW) {
-                            TempScreen(onNavigate = navController::navigate)
+                            TrackerOverviewScreen(onNavigate = navController::navigate)
                         }
                         composable(Route.SEARCH) {
 

@@ -1,4 +1,4 @@
-package com.vadimko.foodtrackerapp.ui.theme
+package com.vadimko.core_ui
 
 import androidx.compose.ui.graphics.Color
 
