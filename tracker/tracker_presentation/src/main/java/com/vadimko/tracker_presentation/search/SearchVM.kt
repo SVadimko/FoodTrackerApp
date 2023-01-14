@@ -1,5 +1,6 @@
 package com.vadimko.tracker_presentation.search
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -66,6 +67,7 @@ class SearchVM @Inject constructor(
     }
 
     private fun executeSearch() {
+        Log.wtf("log", state.query)
         viewModelScope.launch {
             state = state.copy(
                 isSearching = true,
@@ -75,6 +77,7 @@ class SearchVM @Inject constructor(
             trackerUseCase
                 .searchFood(state.query)
                 .onSuccess { foods ->
+                    Log.wtf("answer", foods.toString())
                     state =
                         state.copy(
                             trackableFood = foods.map { TrackableFoodUiState(food = it) },
