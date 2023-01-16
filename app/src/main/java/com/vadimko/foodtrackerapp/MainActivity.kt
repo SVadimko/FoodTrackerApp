@@ -15,6 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.navigation.Route
 import com.vadimko.foodtrackerapp.navigation.navigate
 import com.vadimko.foodtrackerapp.ui.theme.FoodTrackerAppTheme
@@ -29,9 +30,14 @@ import com.vadimko.onboarding_presentation.welcome.WelcomeScreen
 import com.vadimko.tracker_presentation.search.SearchScreen
 import com.vadimko.tracker_presentation.tracker_overview.TrackerOverviewScreen
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var prefs: Preferences
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -49,7 +55,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     NavHost(
                         navController = navController,
-                        startDestination = Route.WELCOME
+                        startDestination = if (prefs.loadShouldShowOnboarding()) Route.WELCOME else Route.TRACKER_OVERVIEW
                     ) {
 
                         composable(Route.WELCOME) {
@@ -88,26 +94,32 @@ class MainActivity : ComponentActivity() {
                         composable(Route.TRACKER_OVERVIEW) {
                             TrackerOverviewScreen(onNavigate = navController::navigate)
                         }
-                        composable(route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
-                        arguments = listOf(
-                            navArgument(
-                                name = "mealName"){
+                        composable(
+                            route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
+                            arguments = listOf(
+                                navArgument(
+                                    name = "mealName"
+                                ) {
                                     type = NavType.StringType
                                 },
-                            navArgument(
-                                name = "dayOfMonth"){
-                                type = NavType.IntType
-                            },
-                            navArgument(
-                                name = "month"){
-                                type = NavType.IntType
-                            },
-                            navArgument(
-                                name = "year"){
-                                type = NavType.IntType
-                            },
+                                navArgument(
+                                    name = "dayOfMonth"
+                                ) {
+                                    type = NavType.IntType
+                                },
+                                navArgument(
+                                    name = "month"
+                                ) {
+                                    type = NavType.IntType
+                                },
+                                navArgument(
+                                    name = "year"
+                                ) {
+                                    type = NavType.IntType
+                                },
 
-                        )) {
+                                )
+                        ) {
                             val mealType = it.arguments?.getString("mealName")!!
                             val dayOfMonth = it.arguments?.getInt("dayOfMonth")!!
                             val month = it.arguments?.getInt("month")!!
@@ -118,7 +130,7 @@ class MainActivity : ComponentActivity() {
                                 dayOfMonth = dayOfMonth,
                                 month = month,
                                 year = year,
-                                onNavigateUp = {navController.navigateUp()})
+                                onNavigateUp = { navController.navigateUp() })
 
                         }
                         composable(Route.GOAL) {
