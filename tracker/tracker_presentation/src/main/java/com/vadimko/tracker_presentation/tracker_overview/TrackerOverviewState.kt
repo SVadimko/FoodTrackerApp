@@ -4,6 +4,7 @@ import com.vadimko.tracker_domain.model.TrackedFood
 import java.time.LocalDate
 
 data class TrackerOverviewState(
+    val userName: String = "",
     val totalCarbs: Int = 0,
     val totalProtein: Int = 0,
     val totalFat: Int = 0,

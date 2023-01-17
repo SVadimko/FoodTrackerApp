@@ -57,9 +57,10 @@ class MainActivity : ComponentActivity() {
                         navController = navController,
                         startDestination = if (prefs.loadShouldShowOnboarding()) Route.WELCOME else Route.TRACKER_OVERVIEW
                     ) {
-
                         composable(Route.WELCOME) {
-                            WelcomeScreen(onNavigate = navController::navigate)
+                            WelcomeScreen(
+                                scaffoldState = scaffoldState,
+                                onNavigate = navController::navigate)
                         }
                         composable(Route.AGE) {
                             AgeScreen(

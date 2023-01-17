@@ -10,7 +10,7 @@ import com.vadimko.tracker_domain.model.TrackedFood
 import kotlin.math.roundToInt
 
 class CalculateMealNutrients(
-    val prefs: Preferences
+    private val prefs: Preferences
 ) {
     operator fun invoke(trackedFoods: List<TrackedFood>): Result {
         val allNutrients = trackedFoods
@@ -32,16 +32,15 @@ class CalculateMealNutrients(
         val totalCalories = allNutrients.values.sumOf { it.calories }
 
         val userInfo = prefs.loadUserInfo()
-        val caloryGoal = dailyCaloryRequirement(userInfo)
-        val carbsGoal = (caloryGoal * userInfo.carbRatio / 4f).roundToInt()
-        val proteinGoal = (caloryGoal * userInfo.proteinRatio / 4f).roundToInt()
-        val fatGoal = (caloryGoal * userInfo.fatRatio / 9f).roundToInt()
-
+        val caloriesGoal = dailyCaloryRequirement(userInfo)
+        val carbsGoal = (caloriesGoal * userInfo.carbRatio / 4f).roundToInt()
+        val proteinGoal = (caloriesGoal * userInfo.proteinRatio / 4f).roundToInt()
+        val fatGoal = (caloriesGoal * userInfo.fatRatio / 9f).roundToInt()
         return Result(
             carbsGoal = carbsGoal,
             proteinGoal = proteinGoal,
             fatGoal = fatGoal,
-            caloriesGoal = caloryGoal,
+            caloriesGoal = caloriesGoal,
             totalCarbs = totalCarbs,
             totalProtein = totalProtein,
             totalFat = totalFat,
@@ -54,7 +53,7 @@ class CalculateMealNutrients(
     private fun bmr(userInfo: UserInfo): Int {
         return when (userInfo.gender) {
             is Gender.Male -> {
-                (66.47f + 13.75f * userInfo.weight +
+                (660.47f + 13.75f * userInfo.weight +
                         5f * userInfo.height - 6.75f * userInfo.age).roundToInt()
             }
             is Gender.Female -> {

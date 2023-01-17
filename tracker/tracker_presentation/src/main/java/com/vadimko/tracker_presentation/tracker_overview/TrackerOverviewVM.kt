@@ -20,7 +20,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TrackerOverviewVM @Inject constructor(
-    preferences: Preferences,
+   private val prefs: Preferences,
     private val trackerUseCase: TrackerUseCase,
 ) : ViewModel() {
 
@@ -30,11 +30,14 @@ class TrackerOverviewVM @Inject constructor(
     var state by mutableStateOf(TrackerOverviewState())
         private set
 
+    var userName by mutableStateOf("")
+
     private var getFoodsForDateJob: Job? = null
 
     init {
         refreshFoods()
-        preferences.saveShouldShowOnboarding(false)
+        getUserName()
+        prefs.saveShouldShowOnboarding(false)
     }
 
     fun onEvent(event: TrackerOverviewEvent) {
@@ -81,6 +84,12 @@ class TrackerOverviewVM @Inject constructor(
                 )
             }
         }
+    }
+
+    private fun getUserName(){
+        state = state.copy(
+            userName = prefs.getUserName()
+        )
     }
 
     private fun refreshFoods() {

@@ -19,6 +19,7 @@ fun UnitTextField(
     onValueChange: (String) -> Unit,
     unit: String,
     modifier: Modifier = Modifier,
+    keyboardType: KeyboardType = KeyboardType.Number,
     textStyle: TextStyle = TextStyle(
         color = MaterialTheme.colors.primaryVariant,
         fontSize = 70.sp
@@ -34,7 +35,7 @@ fun UnitTextField(
             onValueChange = onValueChange,
             textStyle = textStyle,
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.Number
+                keyboardType = keyboardType
             ),
             singleLine = true,
             modifier = Modifier
@@ -42,10 +43,12 @@ fun UnitTextField(
                 .alignBy(LastBaseline)
         )
         Spacer(modifier = Modifier.width(spacing.spaceSmall))
-        Text(
-            text = unit,
-            modifier = Modifier.alignBy(LastBaseline)
-        )
+        if(unit.isNotBlank()) {
+            Text(
+                text = unit,
+                modifier = Modifier.alignBy(LastBaseline)
+            )
+        }
     }
 
 }

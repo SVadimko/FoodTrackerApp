@@ -2,24 +2,46 @@ package com.vadimko.onboarding_presentation.welcome
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import com.vadimko.core.navigation.Route
+import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core_ui.LocalSpacing
 import com.vadimko.onboarding_presentation.R
 import com.vadimko.onboarding_presentation.components.ActionButton
+import com.vadimko.onboarding_presentation.components.UnitTextField
 
 @Composable
-fun WelcomeScreen(onNavigate:(UiEvent.Navigate) -> Unit) {
-    val context = LocalContext.current
+fun WelcomeScreen(
+    scaffoldState: ScaffoldState,
+    onNavigate: (UiEvent.Navigate) -> Unit,
+    viewModel: WelcomeVM = hiltViewModel()
+) {
     val spacing = LocalSpacing.current
+    val context = LocalContext.current
+    LaunchedEffect(key1 = true) {
+        viewModel.uiEvent.collect {
+            when (it) {
+                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.ShowSnackBar -> {
+                    scaffoldState.snackbarHostState.showSnackbar(
+                        message = it.msg.asString(context)
+                    )
+                }
+                else -> Unit
+            }
+        }
+    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -28,14 +50,30 @@ fun WelcomeScreen(onNavigate:(UiEvent.Navigate) -> Unit) {
         horizontalAlignment = CenterHorizontally
     ) {
         Text(
-            text = stringResource(id = R.string.welcome_text),
+            text = stringResource(id = R.string.welcome_header),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.h1
         )
+        Spacer(modifier = Modifier.height(spacing.spaceSmall))
+        Text(
+            text = stringResource(id = R.string.welcome_description),
+            textAlign = TextAlign.Center,
+            style = MaterialTheme.typography.h3
+        )
         Spacer(modifier = Modifier.height(spacing.spaceMedium))
+        UnitTextField(
+            value = viewModel.name,
+            onValueChange = viewModel::onNameEnter,
+            unit = "",
+            textStyle = TextStyle(
+                color = MaterialTheme.colors.primaryVariant,
+                fontSize = 30.sp),
+            keyboardType = KeyboardType.Text
+        )
+        Spacer(modifier = Modifier.height(spacing.spaceLarge))
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = { onNavigate(UiEvent.Navigate(Route.GENDER)) },
+            onClick = { viewModel.onNextClick() },
             modifier = Modifier.align(CenterHorizontally)
         )
     }

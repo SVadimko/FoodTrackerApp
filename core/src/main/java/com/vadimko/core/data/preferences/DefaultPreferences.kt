@@ -13,6 +13,7 @@ import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_FAT_RATIO
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_GENDER
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_GOAL
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_HEIGHT
+import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_NAME
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_PROTEIN_RATIO
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_SHOULD_SHOW_ONBOARDING
 import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_WEIGHT
@@ -20,6 +21,12 @@ import com.vadimko.core.domain.preferences.Preferences.Companion.KEY_WEIGHT
 class DefaultPreferences(
     private val sharedPrefs: SharedPreferences
 ) : Preferences {
+    override fun saveName(name: String) {
+      sharedPrefs.edit()
+          .putString(KEY_NAME, name)
+          .apply()
+    }
+
     override fun saveGender(gender: Gender) {
        sharedPrefs.edit()
                .putString(KEY_GENDER, gender.name)
@@ -75,6 +82,7 @@ class DefaultPreferences(
     }
 
     override fun loadUserInfo(): UserInfo {
+        val name = sharedPrefs.getString(KEY_NAME, "")?:""
         val age = sharedPrefs.getInt(KEY_AGE, 20)
         val gender = Gender.fromString(sharedPrefs.getString(KEY_GENDER, Gender.Male.name)?:Gender.Male.name)
         val height = sharedPrefs.getInt(KEY_HEIGHT, 175)
@@ -85,6 +93,7 @@ class DefaultPreferences(
         val proteinRatio = sharedPrefs.getFloat(KEY_PROTEIN_RATIO, 45F)
         val fatRatio = sharedPrefs.getFloat(KEY_FAT_RATIO, 10F)
         return UserInfo(
+            name = name,
             gender = gender,
             age = age,
             height = height,
@@ -107,6 +116,10 @@ class DefaultPreferences(
 
     override fun loadShouldShowOnboarding(): Boolean {
        return sharedPrefs.getBoolean(KEY_SHOULD_SHOW_ONBOARDING, true)
+    }
+
+    override fun getUserName(): String {
+        return sharedPrefs.getString(KEY_NAME, "")?:""
     }
 
 

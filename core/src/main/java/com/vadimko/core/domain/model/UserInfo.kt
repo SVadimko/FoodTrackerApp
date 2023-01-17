@@ -1,6 +1,7 @@
 package com.vadimko.core.domain.model
 
 data class UserInfo(
+    val name: String,
     val gender: Gender,
     var age: Int,
     var weight: Float,

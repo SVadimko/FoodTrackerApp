@@ -7,6 +7,7 @@ import com.vadimko.core.domain.model.UserInfo
 
 interface Preferences {
 
+    fun saveName(name: String)
     fun saveGender(gender: Gender)
     fun saveAge(age: Int)
     fun saveWeight(weight: Float)
@@ -20,8 +21,10 @@ interface Preferences {
     fun loadUserInfo():UserInfo
     fun saveShouldShowOnboarding(shouldShow: Boolean)
     fun loadShouldShowOnboarding():Boolean
+    fun getUserName():String
 
     companion object{
+        const val KEY_NAME = "name"
         const val KEY_GENDER = "gender"
         const val KEY_AGE = "age"
         const val KEY_WEIGHT = "weight"
