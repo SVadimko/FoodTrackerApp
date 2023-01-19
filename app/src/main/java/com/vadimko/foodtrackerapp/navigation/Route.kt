@@ -1,4 +1,4 @@
-package com.vadimko.core.navigation
+package com.vadimko.foodtrackerapp.navigation
 
 object Route {
     const val WELCOME = "welcome"

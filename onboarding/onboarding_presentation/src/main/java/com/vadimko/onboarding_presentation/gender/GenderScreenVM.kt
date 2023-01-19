@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.model.Gender
 import com.vadimko.core.domain.preferences.Preferences
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -33,7 +32,7 @@ class GenderScreenVM @Inject constructor(
     fun onNextClick() {
         viewModelScope.launch {
             prefs.saveGender(selectedGender)
-            _uiEvent.send(UiEvent.Navigate(Route.AGE))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

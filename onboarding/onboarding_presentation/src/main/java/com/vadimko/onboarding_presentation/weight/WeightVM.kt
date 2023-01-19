@@ -1,15 +1,12 @@
 package com.vadimko.onboarding_presentation.weight
 
-import android.app.PendingIntent
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.preferences.Preferences
-import com.vadimko.core.domain.usecase.FilterOutDigits
 import com.vadimko.core.domain.usecase.FilterOutFloatDigits
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
 import com.vadimko.onboarding_domain.usecase.ValidateWeight
@@ -46,7 +43,7 @@ class WeightVM @Inject constructor(
                 return@launch
             }
             prefs.saveWeight(weightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.ACTIVITY))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 

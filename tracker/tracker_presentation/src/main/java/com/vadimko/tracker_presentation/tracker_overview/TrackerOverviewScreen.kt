@@ -17,20 +17,12 @@ import kotlinx.coroutines.flow.collect
 
 @Composable
 fun TrackerOverviewScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNavigateToSearch: (String, Int, Int, Int) -> Unit,
     viewModel: TrackerOverviewVM = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     val state = viewModel.state
     val context = LocalContext.current
-    LaunchedEffect(key1 = context){
-        viewModel.uiEvent.collect{
-            when(it){
-                is UiEvent.Navigate -> onNavigate(it)
-                else -> Unit
-            }
-        }
-    }
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -49,17 +41,17 @@ fun TrackerOverviewScreen(
             )
             Spacer(modifier = Modifier.height(spacing.spaceSmall))
         }
-        items(state.meals) { item ->
+        items(state.meals) { meal ->
             ExpendableMeal(
-                meal = item,
-                onToggleClick = { viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(item)) },
+                meal = meal,
+                onToggleClick = { viewModel.onEvent(TrackerOverviewEvent.OnToggleMealClick(meal)) },
                 content = {
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(horizontal = spacing.spaceSmall)
                     ) {
-                        val filteredByTypeMeal = state.trackedFood.filter{ it.mealType == item.mealType}
+                        val filteredByTypeMeal = state.trackedFood.filter{ it.mealType == meal.mealType}
                         filteredByTypeMeal.forEach { food ->
                             TrackedFoodItem(
                                 trackedFood = food,
@@ -74,9 +66,14 @@ fun TrackerOverviewScreen(
                         AddButton(
                             text = stringResource(
                                 id = R.string.add_meal,
-                                item.name.asString(context)
+                                meal.name.asString(context)
                             ),
-                            onClick = { viewModel.onEvent(TrackerOverviewEvent.OnAddFoodClick(item)) },
+                            onClick = { onNavigateToSearch(
+                                meal.name.asString(context),
+                                state.date.dayOfMonth,
+                                state.date.monthValue,
+                                state.date.year
+                            ) },
                             modifier = Modifier.fillMaxWidth()
                         )
                     }

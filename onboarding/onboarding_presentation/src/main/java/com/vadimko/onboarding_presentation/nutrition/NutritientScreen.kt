@@ -20,7 +20,7 @@ import com.vadimko.onboarding_presentation.components.UnitTextField
 @Composable
 fun NutritionScreen(
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: NutrientVM = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
@@ -28,7 +28,7 @@ fun NutritionScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
             when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = "${it.msg.asString(context)} ${viewModel.sumRatio}"
@@ -79,7 +79,7 @@ fun NutritionScreen(
         }
         ActionButton(
             text = stringResource(id = R.string.next),
-            onClick = { viewModel.onNextClick() },
+            onClick = {  viewModel.onEvent(NutrientGoalEvent.OnNextClick) },
             modifier = Modifier.align(Alignment.BottomEnd)
         )
     }

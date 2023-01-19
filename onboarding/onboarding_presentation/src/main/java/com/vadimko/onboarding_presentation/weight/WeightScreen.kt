@@ -21,7 +21,7 @@ import com.vadimko.onboarding_presentation.height.HeightVM
 @Composable
 fun WeightScreen(
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: WeightVM = hiltViewModel()
 ){
     val spacing = LocalSpacing.current
@@ -29,7 +29,7 @@ fun WeightScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
             when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = it.msg.asString(context)

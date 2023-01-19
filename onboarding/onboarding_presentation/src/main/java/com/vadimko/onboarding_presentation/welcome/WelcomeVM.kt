@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.preferences.Preferences
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
 import com.vadimko.onboarding_presentation.R
@@ -40,7 +39,7 @@ class WelcomeVM @Inject constructor(
                 }
             }
             prefs.saveName(name)
-            _uiEvent.send(UiEvent.Navigate(Route.GENDER))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

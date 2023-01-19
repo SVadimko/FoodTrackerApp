@@ -22,14 +22,14 @@ import com.vadimko.onboarding_presentation.components.SelectableButton
 
 @Composable
 fun GoalScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: GoalScreenVM = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
             when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }

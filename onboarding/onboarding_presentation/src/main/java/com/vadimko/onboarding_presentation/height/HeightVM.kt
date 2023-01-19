@@ -7,10 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.domain.usecase.FilterOutDigits
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
-import com.vadimko.onboarding_domain.di.OnboardingDomainModule.OnboardingPresentation.providesValidateHeightUseCase
 import com.vadimko.onboarding_domain.usecase.ValidateHeight
 import com.vadimko.onboarding_presentation.R
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,7 +45,7 @@ class HeightVM @Inject constructor(
                 return@launch
             }
             prefs.saveHeight(heightNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.WEIGHT))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 

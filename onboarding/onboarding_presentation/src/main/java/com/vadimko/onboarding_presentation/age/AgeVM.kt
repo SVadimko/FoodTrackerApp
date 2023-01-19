@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.domain.usecase.FilterOutDigits
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
 import com.vadimko.onboarding_domain.usecase.ValidateAge
@@ -45,7 +44,7 @@ class AgeVM @Inject constructor(
                 return@launch
             }
             prefs.saveAge(ageNumber)
-            _uiEvent.send(UiEvent.Navigate(Route.HEIGHT))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

@@ -6,9 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.model.ActivityLevel
-import com.vadimko.core.domain.model.Gender
 import com.vadimko.core.domain.preferences.Preferences
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -34,7 +32,7 @@ class ActivityScreenVM @Inject constructor(
     fun onNextClick() {
         viewModelScope.launch {
             prefs.saveActivityLevel(selectedActivity)
-            _uiEvent.send(UiEvent.Navigate(Route.GOAL))
+            _uiEvent.send(UiEvent.Success)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.vadimko.onboarding_presentation.gender
 
-import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -13,24 +12,22 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.vadimko.core.domain.model.Gender
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core_ui.LocalSpacing
 import com.vadimko.onboarding_presentation.R
 import com.vadimko.onboarding_presentation.components.ActionButton
 import com.vadimko.onboarding_presentation.components.SelectableButton
-import kotlinx.coroutines.flow.collect
 
 @Composable
 fun GenderScreen(
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: GenderScreenVM = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
             when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.Success -> onNextClick()
                 else -> Unit
             }
         }

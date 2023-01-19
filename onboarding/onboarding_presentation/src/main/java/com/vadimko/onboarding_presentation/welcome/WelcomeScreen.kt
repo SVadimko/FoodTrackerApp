@@ -24,7 +24,7 @@ import com.vadimko.onboarding_presentation.components.UnitTextField
 @Composable
 fun WelcomeScreen(
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: WelcomeVM = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
@@ -32,7 +32,7 @@ fun WelcomeScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
             when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                     scaffoldState.snackbarHostState.showSnackbar(
                         message = it.msg.asString(context)

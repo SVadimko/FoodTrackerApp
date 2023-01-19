@@ -9,7 +9,6 @@ import androidx.lifecycle.viewModelScope
 import com.vadimko.core.domain.model.NutrientGoalState
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.core.domain.usecase.FilterOutDigits
-import com.vadimko.core.navigation.Route
 import com.vadimko.core.util.UiEvent
 import com.vadimko.core.util.UiText
 import com.vadimko.onboarding_domain.usecase.ValidateNutrients
@@ -72,36 +71,9 @@ class NutrientVM @Inject constructor(
                             "${result.carbsRatio}  ${result.fatRatio}  ${result.proteinRatio}"
                         )
                         viewModelScope.launch {
-                            _uiEvent.send(UiEvent.Navigate(Route.TRACKER_OVERVIEW))
+                            _uiEvent.send(UiEvent.Success)
                         }
                     }
-                }
-            }
-        }
-    }
-
-    fun onNextClick() {
-        val result = nutrients(
-            NutrientGoalState(
-                carbsRatio = state.carbsRatio,
-                proteinRatio = state.proteinRatio,
-                fatRatio = state.fatRatio
-            )
-        )
-        when (result) {
-            is ValidateNutrients.Result.Error -> {
-                sumRatio = result.message
-                viewModelScope.launch {
-                    _uiEvent.send(UiEvent.ShowSnackBar(UiText.StringResource(R.string.error_not_100_percent)))
-                    return@launch
-                }
-            }
-            is ValidateNutrients.Result.Success -> {
-                prefs.saveCarbRatio(result.carbsRatio)
-                prefs.saveFatRatio(result.fatRatio)
-                prefs.saveProteinRatio(result.proteinRatio)
-                viewModelScope.launch {
-                    _uiEvent.send(UiEvent.Navigate(Route.TRACKER_OVERVIEW))
                 }
             }
         }

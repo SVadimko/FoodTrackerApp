@@ -53,7 +53,7 @@ class CalculateMealNutrients(
     private fun bmr(userInfo: UserInfo): Int {
         return when (userInfo.gender) {
             is Gender.Male -> {
-                (660.47f + 13.75f * userInfo.weight +
+                (66.47f + 13.75f * userInfo.weight +
                         5f * userInfo.height - 6.75f * userInfo.age).roundToInt()
             }
             is Gender.Female -> {

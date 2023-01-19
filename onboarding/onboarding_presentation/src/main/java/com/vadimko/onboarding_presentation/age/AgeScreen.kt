@@ -25,7 +25,7 @@ import com.vadimko.onboarding_presentation.gender.GenderScreenVM
 @Composable
 fun AgeScreen(
     scaffoldState: ScaffoldState,
-    onNavigate: (UiEvent.Navigate) -> Unit,
+    onNextClick: () -> Unit,
     viewModel: AgeVM = hiltViewModel()
 ) {
     val spacing = LocalSpacing.current
@@ -33,7 +33,7 @@ fun AgeScreen(
     LaunchedEffect(key1 = true) {
         viewModel.uiEvent.collect {
             when (it) {
-                is UiEvent.Navigate -> onNavigate(it)
+                is UiEvent.Success -> onNextClick()
                 is UiEvent.ShowSnackBar -> {
                 scaffoldState.snackbarHostState.showSnackbar(
                     message = it.msg.asString(context)
