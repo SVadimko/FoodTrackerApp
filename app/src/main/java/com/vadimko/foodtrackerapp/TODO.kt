@@ -8,6 +8,7 @@ package com.vadimko.foodtrackerapp
 //loadingScreen
 //pagination for search request
 //detail trackable food screen
+//pulltorefresh
 
 //DONE
 //user name
