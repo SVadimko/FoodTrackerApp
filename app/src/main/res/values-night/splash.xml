@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.FoodTrackerApp.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FF00C713</item>
+
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_logo</item>
+
+        <item name="postSplashScreenTheme">@style/Theme.FoodTrackerApp</item>
+    </style>
+</resources>
+
+
