@@ -92,13 +92,42 @@ class MainActivity : ComponentActivity() {
                                 }
                             )
                         }
-                        composable(Route.WEIGHT) {
+                    /*    composable(Route.WEIGHT) {
                             WeightScreen(
                                 scaffoldState = scaffoldState,
                                 onNextClick = {
                                     navController.navigate(Route.ACTIVITY)
                                 }
                             )
+                        }*/
+                        composable(
+                            route = Route.WEIGHT + "/{height}",
+                            arguments = listOf(
+                                navArgument(
+                                    name = "height"
+                                ) {
+                                    type = NavType.StringType
+                                }
+                                )
+                        ) {
+                            val height = it.arguments?.getString("height")!!
+                            WeightScreen(
+                                scaffoldState = scaffoldState,
+                                height = height,
+                                onNextClick = {
+                                    navController.navigate(Route.ACTIVITY)
+                                })
+
+                        }
+                        composable(Route.HEIGHT){
+                            HeightScreen(
+                                scaffoldState = scaffoldState,
+                                onNextClick = { height->
+                                    navController.navigate(
+                                        Route.WEIGHT +
+                                                "/$height"
+                                    )
+                                } )
                         }
                         composable(Route.NUTRIENT_GOAL) {
                             NutritionScreen(

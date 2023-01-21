@@ -33,17 +33,23 @@ class HeightVM @Inject constructor(
 
     fun onHeightEnter(height: String) {
         if (height.length <= 3) {
-          //  this.height = filterOutDigits(height)
             this.height = validateHeight(height)
         }
     }
 
     fun onNextClick() {
         viewModelScope.launch {
-            val heightNumber = height.toIntOrNull() ?: kotlin.run {
+            val heightNumber = height.toIntOrNull()
+            if(heightNumber == null || heightNumber == 0){
+                kotlin.run {
+                    _uiEvent.send(UiEvent.ShowSnackBar(UiText.StringResource(R.string.error_height_cant_be_empty)))
+                    return@launch
+                }
+            }
+           /* val heightNumber = height.toIntOrNull() ?: kotlin.run {
                 _uiEvent.send(UiEvent.ShowSnackBar(UiText.StringResource(R.string.error_height_cant_be_empty)))
                 return@launch
-            }
+            }*/
             prefs.saveHeight(heightNumber)
             _uiEvent.send(UiEvent.Success)
         }
