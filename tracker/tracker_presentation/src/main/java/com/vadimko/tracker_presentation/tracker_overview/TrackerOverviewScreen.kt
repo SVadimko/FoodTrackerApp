@@ -26,7 +26,6 @@ fun TrackerOverviewScreen(
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
-            .padding(bottom = spacing.spaceMedium)
     ) {
         item {
             NutrientsHeader(state = state)

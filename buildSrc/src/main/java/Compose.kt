@@ -19,4 +19,7 @@ object Compose {
 
     private const val lifecycleVersion = "2.4.0"
     const val viewModelCompose = "androidx.lifecycle:lifecycle-viewmodel-compose:$lifecycleVersion"
+    
+    private const val splashScreenVersion = "1.0.0"
+    const val splashScreenCompose = "androidx.core:core-splashscreen:$splashScreenVersion"
 }

@@ -5,7 +5,7 @@ package com.vadimko.foodtrackerapp
 //changing date via date picker
 //ability to change height, weight etc data???
 //showing BMI?
-//loadingScreen
+//onError response state
 //pagination for search request
 //detail trackable food screen
 //pulltorefresh
@@ -13,3 +13,4 @@ package com.vadimko.foodtrackerapp
 //DONE
 //user name
 // change app icon
+// loadingScreen

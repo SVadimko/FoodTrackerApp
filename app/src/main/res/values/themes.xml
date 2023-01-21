@@ -19,5 +19,5 @@
 
     <style name="Theme.FoodTrackerApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.FoodTrackerrApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.FoodTrackerApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
