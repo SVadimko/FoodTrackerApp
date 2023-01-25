@@ -2,11 +2,7 @@ package com.vadimko.foodtrackerapp
 
 //TODO
 //change expendable meal to fit screen in large amount of kcal
-//changing date via date picker
 //ability to change height, weight etc data???
-//showing BMI?
-//onError response state
-//pagination for search request
 //detail trackable food screen
 //pulltorefresh
 
@@ -14,3 +10,7 @@ package com.vadimko.foodtrackerapp
 //user name
 // change app icon
 // loadingScreen
+// showing BMI?
+//onError response state
+//pagination for search request
+//changing date via date picker

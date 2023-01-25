@@ -8,4 +8,5 @@ dependencies {
     "implementation"(project(Modules.coreUi))
 
     "implementation"(Coil.coilCompose)
+    "implementation"(DataPicker.dataPickerAndroid)
 }

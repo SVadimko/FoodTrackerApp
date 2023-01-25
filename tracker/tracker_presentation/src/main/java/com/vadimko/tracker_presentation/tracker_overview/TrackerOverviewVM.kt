@@ -59,6 +59,12 @@ class TrackerOverviewVM @Inject constructor(
                 )
                 refreshFoods()
             }
+            is TrackerOverviewEvent.OnDatePicker -> {
+                state = state.copy(
+                    date = event.pickedDate
+                )
+                refreshFoods()
+            }
             is TrackerOverviewEvent.OnToggleMealClick -> {
                 state = state.copy(
                     meals = state.meals.map {

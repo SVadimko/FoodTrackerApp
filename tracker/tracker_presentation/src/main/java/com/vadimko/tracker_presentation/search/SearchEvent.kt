@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 sealed class SearchEvent {
     data class OnQueryChange(val query: String) : SearchEvent()
-    object OnSearch : SearchEvent()
+    data class OnSearch(val page: Int): SearchEvent()
     data class OnToggleTrackableFood(val food: TrackableFood) : SearchEvent()
     data class OnAmountFoodForChange(
         val food: TrackableFood,

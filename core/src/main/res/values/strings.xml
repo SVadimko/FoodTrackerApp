@@ -63,4 +63,7 @@
     <string name="error_not_100_percent">The values must add up to 100%. Your current sum is</string>
     <string name="your_goal">Your goal:</string>
     <string name="delete">Delete</string>
+    <string name="data_picker_title">Pick a date</string>
+    <string name="data_picker_ok_btn">OK</string>
+    <string name="data_picker_cancel_btn">Cancel</string>
 </resources>

@@ -1,8 +1,8 @@
 package com.vadimko.tracker_presentation.search
 
+import android.util.Log
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
@@ -74,7 +74,7 @@ fun SearchScreen(
             shouldShowHint = state.isHintVisible,
             onSearch = {
                 keyboardController?.hide()
-                viewModel.onEvent(SearchEvent.OnSearch)
+                viewModel.onEvent(SearchEvent.OnSearch(viewModel.state.page))
             },
             onFocusChanged = {
                 viewModel.onEvent(SearchEvent.OnSearchFocusChange(it.isFocused))
@@ -84,7 +84,12 @@ fun SearchScreen(
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            items(state.trackableFood) { food ->
+            items(state.trackableFood.size) { i ->
+                val food = state.trackableFood[i]
+                if (i >= state.trackableFood.size - 1 && !state.isSearching && !state.endReached) {
+                    viewModel.onEvent(SearchEvent.OnSearch(viewModel.state.page))
+                }
+//            }
                 TrackableFoodItem(
                     trackableFoodUiState = food,
                     onClick = {
@@ -117,12 +122,14 @@ fun SearchScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        when{
+        when {
             state.isSearching -> CircularProgressIndicator()
             state.trackableFood.isEmpty() -> {
-                Text(text = stringResource(id = R.string.no_results),
-                style = MaterialTheme.typography.body1,
-                textAlign = TextAlign.Center)
+                Text(
+                    text = stringResource(id = R.string.no_results),
+                    style = MaterialTheme.typography.body1,
+                    textAlign = TextAlign.Center
+                )
             }
         }
     }

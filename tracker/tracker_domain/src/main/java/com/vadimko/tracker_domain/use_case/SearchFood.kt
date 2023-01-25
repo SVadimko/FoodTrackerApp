@@ -8,8 +8,8 @@ class SearchFood(
 ) {
     suspend operator fun invoke(
         searchString: String,
-        page: Int = 1,
-        pageSize: Int = 100
+        page: Int,
+        pageSize: Int = 10
     ): Result<List<TrackableFood>> {
         if(searchString.isBlank()) {
             return Result.success(emptyList())

@@ -29,6 +29,8 @@ class SearchVM @Inject constructor(
     private val _uiEvent = Channel<UiEvent>()
     val uiEvent = _uiEvent.receiveAsFlow()
 
+    private var isMakingRequest = false
+
     fun onEvent(event: SearchEvent) {
         when (event) {
             is SearchEvent.OnSearch -> {
@@ -49,7 +51,7 @@ class SearchVM @Inject constructor(
                 )
             }
             is SearchEvent.OnQueryChange -> {
-                state = state.copy(query = event.query)
+                state = state.copy(query = event.query, page = 1, trackableFood = emptyList())
             }
             is SearchEvent.OnTrackFoodClick -> {
                 trackFood(event)
@@ -67,22 +69,25 @@ class SearchVM @Inject constructor(
     }
 
     private fun executeSearch() {
-        Log.wtf("log", state.query)
+        if (isMakingRequest) {
+            return
+        }
+        Log.wtf("make request", state.query +"  "+ state.page)
+        isMakingRequest = true
         viewModelScope.launch {
             state = state.copy(
                 isSearching = true,
-                trackableFood = emptyList()
 
             )
             trackerUseCase
-                .searchFood(state.query)
+                .searchFood(state.query, page = state.page)
                 .onSuccess { foods ->
-                    Log.wtf("answer", foods.toString())
                     state =
                         state.copy(
-                            trackableFood = foods.map { TrackableFoodUiState(food = it) },
+                            trackableFood =  state.trackableFood + foods.map { TrackableFoodUiState(food = it) },
                             isSearching = false,
-                            query = ""
+                            page = state.page + 1,
+                            endReached = foods.isEmpty()
                         )
                 }
                 .onFailure {
@@ -93,6 +98,7 @@ class SearchVM @Inject constructor(
                         )
                     )
                 }
+            isMakingRequest = false
         }
     }
 
