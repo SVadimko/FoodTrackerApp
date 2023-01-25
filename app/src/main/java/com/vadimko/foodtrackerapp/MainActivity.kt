@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -57,11 +58,15 @@ class MainActivity : ComponentActivity() {
                 val scaffoldState = rememberScaffoldState()
                 Scaffold(
                     modifier = Modifier.fillMaxSize(),
-                    scaffoldState = scaffoldState
-                ) {
+                    scaffoldState = scaffoldState,
+                ) { padding->
                     NavHost(
+
                         navController = navController,
-                        startDestination = if (prefs.loadShouldShowOnboarding()) Route.WELCOME else Route.TRACKER_OVERVIEW
+                        startDestination = if (prefs.loadShouldShowOnboarding()) Route.WELCOME else Route.TRACKER_OVERVIEW,
+                        modifier = Modifier
+                            .padding(padding)
+
                     ) {
                         composable(Route.WELCOME) {
                             WelcomeScreen(

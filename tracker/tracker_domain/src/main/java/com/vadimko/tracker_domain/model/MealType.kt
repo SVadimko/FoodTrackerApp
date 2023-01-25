@@ -1,10 +1,10 @@
 package com.vadimko.tracker_domain.model
 
 sealed class MealType(val name: String) {
-    object Breakfast : MealType("breakfast")
-    object Lunch : MealType("lunch")
-    object Dinner : MealType("dinner")
-    object Snack : MealType("snack")
+    object Breakfast : MealType("Breakfast")
+    object Lunch : MealType("Lunch")
+    object Dinner : MealType("Dinner")
+    object Snack : MealType("Snack")
 
     companion object {
         fun fromString(name: String): MealType {
