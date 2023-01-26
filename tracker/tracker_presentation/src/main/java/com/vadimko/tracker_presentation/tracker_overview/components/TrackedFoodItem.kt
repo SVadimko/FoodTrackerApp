@@ -40,7 +40,7 @@ fun TrackedFoodItem(
             .clip(RoundedCornerShape(5.dp))
             .padding(spacing.spaceExtraSmall)
             .shadow(
-                elevation = 1.dp,
+                elevation = 2.dp,
                 shape = RoundedCornerShape(5.dp)
             )
             .background(MaterialTheme.colors.surface)

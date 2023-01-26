@@ -81,6 +81,8 @@ fun TrackerOverviewScreen(
                 modifier = Modifier.fillMaxWidth()
             )
         }
+        item {
+            Spacer(modifier = Modifier.height(spacing.spaceSmall))
+        }
     }
-
 }

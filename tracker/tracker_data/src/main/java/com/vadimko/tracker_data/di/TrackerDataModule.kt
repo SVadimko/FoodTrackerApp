@@ -30,12 +30,12 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(): OkHttpClient{
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .apply {
                 ignoreAllSSLErrors()
             }
-            .addInterceptor( HttpLoggingInterceptor().apply {
+            .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
             .connectTimeout(30, TimeUnit.SECONDS)
@@ -46,7 +46,7 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
-    fun provideOpenFoodApi(client: OkHttpClient): OpenFoodApi{
+    fun provideOpenFoodApi(client: OkHttpClient): OpenFoodApi {
         return Retrofit.Builder()
             .baseUrl(OpenFoodApi.BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create())
@@ -57,7 +57,7 @@ object TrackerDataModule {
 
     @Provides
     @Singleton
-    fun provideTrackerDateBase(app: Application): TrackerDataBase{
+    fun provideTrackerDateBase(app: Application): TrackerDataBase {
         return Room.databaseBuilder(
             app,
             TrackerDataBase::class.java,
@@ -70,7 +70,7 @@ object TrackerDataModule {
     fun provideTrackerRepository(
         dataBase: TrackerDataBase,
         api: OpenFoodApi
-    ): TrackerRepository{
+    ): TrackerRepository {
         return TrackerRepositoryImpl(dataBase.dao, api)
     }
 

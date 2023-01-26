@@ -64,16 +64,21 @@ fun ExpendableMeal(
                     )
                 }
                 Spacer(modifier = Modifier.height(spacing.spaceSmall))
-                Row(
+                Column(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween
+                    verticalArrangement = Arrangement.Center,
+                    //horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     UnitDisplay(
                         amount = meal.calories,
                         unit = stringResource(id = R.string.kcal),
                         amountTextSize = 30.sp
                     )
-                    Row {
+                    Spacer(modifier = Modifier.height(spacing.spaceSmall))
+                    Row (
+                        modifier = Modifier.fillMaxWidth().padding(end = spacing.spaceSmall),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
                         NutrientInfo(
                             name = stringResource(id = R.string.protein),
                             amount = meal.protein,
