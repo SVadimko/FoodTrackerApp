@@ -15,7 +15,8 @@ android {
         versionCode = ProjectConfig.versionCode
         versionName = ProjectConfig.versionName
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.vadimko.foodtrackerapp.HiltTestRunner"
         vectorDrawables {
             useSupportLibrary = true
         }
