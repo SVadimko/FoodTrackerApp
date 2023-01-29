@@ -10,15 +10,23 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.vadimko.core.domain.preferences.Preferences
+import com.vadimko.foodtrackerapp.navigation.BlankTempScreen
+import com.vadimko.foodtrackerapp.navigation.BottomNavigationBar
+import com.vadimko.foodtrackerapp.navigation.NavBarItemsList
 import com.vadimko.foodtrackerapp.navigation.Route
 import com.vadimko.foodtrackerapp.ui.theme.FoodTrackerAppTheme
 import com.vadimko.onboarding_presentation.age.AgeScreen
@@ -56,12 +64,27 @@ class MainActivity : ComponentActivity() {
                       ) {*/
                 val navController = rememberNavController()
                 val scaffoldState = rememberScaffoldState()
+               val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
+                when (navBackStackEntry?.destination?.route) {
+                    Route.TRACKER_OVERVIEW, Route.SEARCH ->  bottomBarState.value = true
+                    else -> bottomBarState.value = false
+                }
                 Scaffold(
+                  /*  bottomBar = {
+                            BottomNavigationBar(
+                                items = NavBarItemsList.createNavItemsList(),
+                                navController = navController,
+                                onItemClick = {
+                                    navController.navigate(it.route)
+                                },
+                                bottomBarState = bottomBarState
+                            )
+                    },*/
                     modifier = Modifier.fillMaxSize(),
                     scaffoldState = scaffoldState,
                 ) { padding->
                     NavHost(
-
                         navController = navController,
                         startDestination = if (prefs.loadShouldShowOnboarding()) Route.WELCOME else Route.TRACKER_OVERVIEW,
                         modifier = Modifier
@@ -202,6 +225,10 @@ class MainActivity : ComponentActivity() {
                             GoalScreen(onNextClick = {
                                 navController.navigate(Route.NUTRIENT_GOAL)
                             })
+                        }
+                        composable(Route.TEMP_SCREEN) {
+                            BlankTempScreen(
+                            )
                         }
                     }
                     //  }
