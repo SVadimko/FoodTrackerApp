@@ -39,9 +39,9 @@ class TrackerRepositoryImpl(
                 it.nutriments.energyKcal100g in (lowerBound..upperBound)
             }*/
                 .mapNotNull { it.toTrackableFood() })
-        } catch (e: Exception) {
-            Log.wtf("TF_searchFood", e.message)
-            Result.failure(e)
+        } catch (err: Exception) {
+            Log.e("TF_searchFood", err.message.toString())
+            Result.failure(err)
         }
     }
 
