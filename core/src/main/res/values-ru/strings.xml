@@ -66,4 +66,23 @@
     <string name="data_picker_title">Pick a date</string>
     <string name="data_picker_ok_btn">OK</string>
     <string name="data_picker_cancel_btn">Cancel</string>
+
+    <string name="additional_info">Additional info</string>
+    <string name="alcohol">Alcohol</string>
+    <string name="calcium">Calcium</string>
+    <string name="cellulose">Cellulose</string>
+    <string name="cu">Cuprum</string>
+    <string name="iron">Iron</string>
+    <string name="fiber">Fiber</string>
+    <string name="magnesium">Magnesium</string>
+    <string name="phosphorus">Phosphorus</string>
+    <string name="potassium">Potassium</string>
+    <string name="omega3">Omega3</string>
+    <string name="omega6">Omega6</string>
+    <string name="salt">Salt</string>
+    <string name="saturatedFat">Saturated Fat</string>
+    <string name="sodium">Sodium</string>
+    <string name="sugars">Sugars</string>
+    <string name="vitaminC">Vitamin C</string>
+    <string name="zinc">Zinc</string>
 </resources>

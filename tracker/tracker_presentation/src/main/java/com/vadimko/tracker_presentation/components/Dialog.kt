@@ -1,4 +1,4 @@
-package com.vadimko.onboarding_presentation.dialog
+package com.vadimko.tracker_presentation.components
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -16,19 +16,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import androidx.lifecycle.ViewModel
-import com.vadimko.onboarding_presentation.nutrition.NutrientGoalEvent
-import com.vadimko.onboarding_presentation.nutrition.NutrientVM
+import com.vadimko.tracker_domain.model.TrackableFood
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
-fun ShowDialog(onDismiss:() -> Unit, viewModel: NutrientVM){
+fun ShowDialog(onDismiss:() -> Unit, food: TrackableFood?){
     val scope = rememberCoroutineScope()
     scope.launch {
         delay(3000)
-        viewModel.onEvent(NutrientGoalEvent.OnNextClick)
+       // viewModel.onEvent(NutrientGoalEvent.OnNextClick)
     }
 
     Dialog(onDismissRequest = { onDismiss() }) {
@@ -44,7 +42,7 @@ fun ShowDialog(onDismiss:() -> Unit, viewModel: NutrientVM){
                     .padding(12.dp)
             ) {
                 Text(
-                    text = "Loading.. Please wait..",
+                    text = food.toString(),
                     Modifier
                         .padding(8.dp), textAlign = TextAlign.Center
                 )

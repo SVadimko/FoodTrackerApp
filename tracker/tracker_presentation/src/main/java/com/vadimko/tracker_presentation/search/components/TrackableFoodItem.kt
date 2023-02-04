@@ -1,5 +1,6 @@
 package com.vadimko.tracker_presentation.search.components
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,6 +17,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -45,6 +47,7 @@ fun TrackableFoodItem(
     onClick: () -> Unit,
     onAmountChange: (String) -> Unit,
     onTrack: () -> Unit,
+    onInfo: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val food = trackableFoodUiState.food
@@ -184,6 +187,14 @@ fun TrackableFoodItem(
                     Icon(
                         imageVector = Icons.Default.Check,
                         contentDescription = stringResource(id = R.string.track)
+                    )
+                }
+                IconButton(
+                    onClick = onInfo,
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = null
                     )
                 }
             }

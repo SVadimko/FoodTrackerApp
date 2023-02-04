@@ -65,6 +65,12 @@ class SearchVM @Inject constructor(
                     }
                 )
             }
+            is SearchEvent.OnInfoTrackFoodClick -> {
+                state = state.copy(isShowInfo = true, infoFood = event.food)
+            }
+            is SearchEvent.OnInfoClose -> {
+                state = state.copy(isShowInfo = false)
+            }
         }
     }
 
