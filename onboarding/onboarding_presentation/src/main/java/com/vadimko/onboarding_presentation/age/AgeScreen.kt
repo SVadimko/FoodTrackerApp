@@ -1,9 +1,7 @@
 package com.vadimko.onboarding_presentation.age
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -22,9 +20,10 @@ import com.vadimko.onboarding_presentation.components.SelectableButton
 import com.vadimko.onboarding_presentation.components.UnitTextField
 import com.vadimko.onboarding_presentation.gender.GenderScreenVM
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun AgeScreen(
-    scaffoldState: ScaffoldState,
+    scaffoldState: BottomSheetScaffoldState,
     onNextClick: () -> Unit,
     viewModel: AgeVM = hiltViewModel()
 ) {

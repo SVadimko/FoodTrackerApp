@@ -30,10 +30,10 @@ import com.vadimko.tracker_presentation.search.components.SearchTextField
 import com.vadimko.tracker_presentation.search.components.TrackableFoodItem
 import java.time.LocalDate
 
-@OptIn(ExperimentalComposeUiApi::class)
+@OptIn(ExperimentalComposeUiApi::class, ExperimentalMaterialApi::class)
 @Composable
 fun SearchScreen(
-    scaffoldState: ScaffoldState,
+    scaffoldState: BottomSheetScaffoldState,
     mealName: String,
     dayOfMonth: Int,
     month: Int,

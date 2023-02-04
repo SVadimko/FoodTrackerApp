@@ -1,9 +1,7 @@
 package com.vadimko.onboarding_presentation.nutrition
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.ScaffoldState
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -17,9 +15,10 @@ import com.vadimko.onboarding_presentation.R
 import com.vadimko.onboarding_presentation.components.ActionButton
 import com.vadimko.onboarding_presentation.components.UnitTextField
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NutritionScreen(
-    scaffoldState: ScaffoldState,
+    scaffoldState: BottomSheetScaffoldState,
     onNextClick: () -> Unit,
     viewModel: NutrientVM = hiltViewModel()
 ) {
