@@ -13,5 +13,7 @@ object Route {
     const val TRACKER_OVERVIEW = "tracker_overview"
     const val SEARCH = "search"
 
+    const val BARCODE_SEARCH = "barcode_search"
+
     const val TEMP_SCREEN = "temp"
 }

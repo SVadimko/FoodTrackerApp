@@ -1,4 +1,4 @@
-package com.vadimko.tracker_presentation.search.components
+package com.vadimko.core_ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -29,7 +29,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.vadimko.core_ui.LocalSpacing
-import com.vadimko.tracker_presentation.R
 
 @Composable
 fun SearchTextField(
@@ -37,7 +36,7 @@ fun SearchTextField(
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit,
     modifier: Modifier = Modifier,
-    hint: String = stringResource(id = R.string.search),
+    hint: String,
     shouldShowHint: Boolean = false,
     onFocusChanged: (FocusState) -> Unit
 ) {
@@ -86,7 +85,7 @@ fun SearchTextField(
         IconButton(onClick =  onSearch ,
             modifier = Modifier.align(CenterEnd)
         ){
-            Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(id = R.string.search))
+            Icon(imageVector = Icons.Default.Search, contentDescription = hint)
         }
     }
 

@@ -29,54 +29,54 @@ fun BottomNavigationBar(
         enter = slideInVertically(initialOffsetY = { it }),
         exit = slideOutVertically(targetOffsetY = { it }),
         content = {
-    BottomNavigation(
-        modifier = modifier,
-        backgroundColor = MaterialTheme.colors.primary,
-        elevation = 5.dp
-    ) {
-        items.forEach { item ->
-            val selected = item.route == backStackEntry.value?.destination?.route
-            BottomNavigationItem(
-                selected = selected,
-                onClick = { onItemClick(item) },
-                selectedContentColor = MaterialTheme.colors.onPrimary,
-                unselectedContentColor = Color.LightGray,
-                icon = {
-                    Column(
-                        horizontalAlignment = CenterHorizontally
-                    ) {
-                        if (item.badgeCount > 0) {
-                            BadgedBox(
-                                badge = {
-                                    Text(text = item.badgeCount.toString())
-                                }
+            BottomNavigation(
+                modifier = modifier,
+                backgroundColor = MaterialTheme.colors.primary,
+                elevation = 5.dp
+            ) {
+                items.forEach { item ->
+                    val selected = item.route == backStackEntry.value?.destination?.route
+                    BottomNavigationItem(
+                        selected = selected,
+                        onClick = { onItemClick(item) },
+                        selectedContentColor = MaterialTheme.colors.onPrimary,
+                        unselectedContentColor = Color.LightGray,
+                        icon = {
+                            Column(
+                                horizontalAlignment = CenterHorizontally
                             ) {
-                                Icon(
-                                    imageVector = item.icon,
-                                    contentDescription = item.name
-                                )
+                                if (item.badgeCount > 0) {
+                                    BadgedBox(
+                                        badge = {
+                                            Text(text = item.badgeCount.toString())
+                                        }
+                                    ) {
+                                        Icon(
+                                            imageVector = item.icon,
+                                            contentDescription = item.name
+                                        )
+
+                                    }
+                                } else {
+                                    Icon(
+                                        imageVector = item.icon,
+                                        contentDescription = item.name
+                                    )
+                                }
+                                if (selected) {
+                                    Text(
+                                        text = item.name,
+                                        textAlign = TextAlign.Center,
+                                        fontSize = MaterialTheme.typography.body2.fontSize
+                                    )
+                                }
 
                             }
-                        } else {
-                            Icon(
-                                imageVector = item.icon,
-                                contentDescription = item.name
-                            )
-                        }
-                        if (selected) {
-                            Text(
-                                text = item.name,
-                                textAlign = TextAlign.Center,
-                                fontSize = MaterialTheme.typography.body2.fontSize
-                            )
-                        }
 
-                    }
-
+                        }
+                    )
                 }
-            )
-        }
 
-    }
-        } )
+            }
+        })
 }

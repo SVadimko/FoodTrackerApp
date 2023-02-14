@@ -71,6 +71,9 @@ dependencies {
     implementation(project(Modules.trackerPresentation))
     implementation(project(Modules.trackerDomain))
     implementation(project(Modules.trackerData))
+    implementation(project(Modules.barcodesearchPresentation))
+    implementation(project(Modules.barcodesearchDomain))
+    implementation(project(Modules.barcodesearchData))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)

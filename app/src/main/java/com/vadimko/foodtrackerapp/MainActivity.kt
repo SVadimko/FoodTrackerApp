@@ -1,21 +1,21 @@
 package com.vadimko.foodtrackerapp
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -23,11 +23,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.vadimko.barcodesearch_presentation.barcodesearch.barcode_search.BarcodeSearchScreen
 import com.vadimko.core.domain.preferences.Preferences
 import com.vadimko.foodtrackerapp.navigation.BlankTempScreen
 import com.vadimko.foodtrackerapp.navigation.BottomNavigationBar
 import com.vadimko.foodtrackerapp.navigation.NavBarItemsList
 import com.vadimko.foodtrackerapp.navigation.Route
+import com.vadimko.foodtrackerapp.support.*
 import com.vadimko.foodtrackerapp.ui.theme.FoodTrackerAppTheme
 import com.vadimko.onboarding_presentation.age.AgeScreen
 import com.vadimko.onboarding_presentation.avtivity.ActivityScreen
@@ -50,10 +52,9 @@ class MainActivity : ComponentActivity() {
 
     private val viewModel: MainVM by viewModels()
 
-    @OptIn(ExperimentalMaterialApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        installSplashScreen().setKeepOnScreenCondition{
+        installSplashScreen().setKeepOnScreenCondition {
             viewModel.isLoading.value
         }
         setContent {
@@ -64,37 +65,37 @@ class MainActivity : ComponentActivity() {
                           color = MaterialTheme.colors.background
                       ) {*/
                 val navController = rememberNavController()
-                val sheetState = rememberBottomSheetState(initialValue = BottomSheetValue.Collapsed)
-                val scaffoldState = rememberBottomSheetScaffoldState(bottomSheetState = sheetState)
-               val navBackStackEntry by navController.currentBackStackEntryAsState()
+                val scaffoldState = rememberScaffoldState()
+                val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val bottomBarState = rememberSaveable { (mutableStateOf(false)) }
+                Log.wtf("Destination", navBackStackEntry?.destination?.route.toString())
                 when (navBackStackEntry?.destination?.route) {
-                    Route.TRACKER_OVERVIEW, Route.SEARCH ->  bottomBarState.value = true
+                    Route.TRACKER_OVERVIEW, Route.SEARCH, Route.BARCODE_SEARCH, Route.TEMP_SCREEN -> bottomBarState.value =
+                        true
                     else -> bottomBarState.value = false
                 }
-                BottomSheetScaffold(
+                Scaffold(
                     scaffoldState = scaffoldState,
-                    sheetContent = {
-                        BottomSheet()
+                    /* sheetContent = {
+                         BottomSheet()
+                     },*/
+                    bottomBar = {
+                        BottomNavigationBar(
+                            items = NavBarItemsList.createNavItemsList(),
+                            navController = navController,
+                            onItemClick = {
+                                navController.navigate(it.route)
+                            },
+                            bottomBarState = bottomBarState
+                        )
                     },
-                  /*  bottomBar = {
-                            BottomNavigationBar(
-                                items = NavBarItemsList.createNavItemsList(),
-                                navController = navController,
-                                onItemClick = {
-                                    navController.navigate(it.route)
-                                },
-                                bottomBarState = bottomBarState
-                            )
-                    },*/
                     modifier = Modifier.fillMaxSize(),
-                    sheetPeekHeight = 16.dp
-                ) { Box {
+                ) { padding ->
                     NavHost(
                         navController = navController,
                         startDestination = if (prefs.loadShouldShowOnboarding()) Route.WELCOME else Route.TRACKER_OVERVIEW,
-//                        modifier = Modifier
-//                            .padding(padding)
+                        modifier = Modifier
+                            .padding(padding)
 
                     ) {
                         composable(Route.WELCOME) {
@@ -135,16 +136,16 @@ class MainActivity : ComponentActivity() {
                             )
                         }*/
                         composable(
-                            route = Route.WEIGHT + "/{height}",
+                            route = Route.WEIGHT + "/{$HEIGHT}",
                             arguments = listOf(
                                 navArgument(
-                                    name = "height"
+                                    name = HEIGHT
                                 ) {
                                     type = NavType.StringType
                                 }
                             )
                         ) {
-                            val height = it.arguments?.getString("height")!!
+                            val height = it.arguments?.getString(HEIGHT)!!
                             WeightScreen(
                                 scaffoldState = scaffoldState,
                                 height = height,
@@ -189,35 +190,35 @@ class MainActivity : ComponentActivity() {
                                 })
                         }
                         composable(
-                            route = Route.SEARCH + "/{mealName}/{dayOfMonth}/{month}/{year}",
+                            route = Route.SEARCH + "/{$MEAL_NAME}/{$DAY_OF_MONTH}/{$MONTH}/{$YEAR}",
                             arguments = listOf(
                                 navArgument(
-                                    name = "mealName"
+                                    name = MEAL_NAME
                                 ) {
                                     type = NavType.StringType
                                 },
                                 navArgument(
-                                    name = "dayOfMonth"
+                                    name = DAY_OF_MONTH
                                 ) {
                                     type = NavType.IntType
                                 },
                                 navArgument(
-                                    name = "month"
+                                    name = MONTH
                                 ) {
                                     type = NavType.IntType
                                 },
                                 navArgument(
-                                    name = "year"
+                                    name = YEAR
                                 ) {
                                     type = NavType.IntType
                                 },
 
                                 )
                         ) {
-                            val mealType = it.arguments?.getString("mealName")!!
-                            val dayOfMonth = it.arguments?.getInt("dayOfMonth")!!
-                            val month = it.arguments?.getInt("month")!!
-                            val year = it.arguments?.getInt("year")!!
+                            val mealType = it.arguments?.getString(MEAL_NAME)!!
+                            val dayOfMonth = it.arguments?.getInt(DAY_OF_MONTH)!!
+                            val month = it.arguments?.getInt(MONTH)!!
+                            val year = it.arguments?.getInt(YEAR)!!
                             SearchScreen(
                                 scaffoldState = scaffoldState,
                                 mealName = mealType,
@@ -236,9 +237,11 @@ class MainActivity : ComponentActivity() {
                             BlankTempScreen(
                             )
                         }
+                        composable(Route.BARCODE_SEARCH) {
+                            BarcodeSearchScreen()
+                        }
                     }
                     //  }
-                }
                 }
             }
         }

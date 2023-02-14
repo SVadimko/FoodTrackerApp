@@ -18,7 +18,7 @@ import com.vadimko.onboarding_presentation.components.UnitTextField
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun NutritionScreen(
-    scaffoldState: BottomSheetScaffoldState,
+    scaffoldState: ScaffoldState,
     onNextClick: () -> Unit,
     viewModel: NutrientVM = hiltViewModel()
 ) {

@@ -10,4 +10,8 @@ object Modules {
     const val trackerData = ":tracker:tracker_data"
     const val trackerDomain = ":tracker:tracker_domain"
     const val trackerPresentation = ":tracker:tracker_presentation"
+
+    const val barcodesearchData = ":barcodesearch:barcodesearch_data"
+    const val barcodesearchDomain = ":barcodesearch:barcodesearch_domain"
+    const val barcodesearchPresentation = ":barcodesearch:barcodesearch_presentation"
 }

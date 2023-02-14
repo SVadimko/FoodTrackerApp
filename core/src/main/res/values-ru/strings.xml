@@ -85,4 +85,26 @@
     <string name="sugars">Sugars</string>
     <string name="vitaminC">Vitamin C</string>
     <string name="zinc">Zinc</string>
+
+    <string name="keywords">Keywords</string>
+    <string name="allergens">Allergens</string>
+    <string name="allergensFromIngredients">Allergens From Ingredients</string>
+    <string name="brands">Brands</string>
+    <string name="brands_tags">Brands tags</string>
+    <string name="categories">Categories</string>
+    <string name="categories_hierarchy">Categories Hierarchy</string>
+    <string name="countries">Countries</string>
+    <string name="imageFrontUrl">imageFrontUrl</string>
+    <string name="imageIngredientsUrl">imageIngredientsUrl</string>
+    <string name="imageNutritionUrl">imageNutritionUrl</string>
+    <string name="ingredientsText">Ingredients</string>
+    <string name="packaging">Packaging</string>
+    <string name="productName">Product Name</string>
+    <string name="servingSize">Serving Size</string>
+
+    <string name="barcodeSearchTitle">Search product by barcode</string>
+
+    <string name="ean_info">INTERNATIONAL ARTICLE NUMBER
+Merchants in Europe and other areas around the world often use a barcode type known as an International Article Number (EAN, since it was formerly known as European Article Number).</string>
+
 </resources>

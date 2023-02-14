@@ -1,29 +1,28 @@
 package com.vadimko.foodtrackerapp.navigation
 
-import android.content.Context
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Warning
 
 object NavBarItemsList {
 
     fun createNavItemsList(): List<BottomNavItem> {
         return listOf(
             BottomNavItem(
-                name = "Home",
+                name = "Track Food",
                 route = Route.TRACKER_OVERVIEW,
                 icon = Icons.Default.Home
             ),
             BottomNavItem(
-                name = "Home2",
-                route = Route.TEMP_SCREEN,
+                name = "BarCode Search",
+                route = Route.BARCODE_SEARCH,
                 icon = Icons.Default.Search
             ),
             BottomNavItem(
-                name = "Home3",
+                name = "Under construction",
                 route = Route.TEMP_SCREEN,
-                icon = Icons.Default.Add
+                icon = Icons.Default.Warning
             )
         )
     }

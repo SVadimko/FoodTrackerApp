@@ -28,7 +28,7 @@ import javax.net.ssl.X509TrustManager
 object TrackerDataModule {
 
 
-    @Provides
+  /*  @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
@@ -42,7 +42,7 @@ object TrackerDataModule {
             .writeTimeout(30, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
-    }
+    }*/
 
     @Provides
     @Singleton
@@ -76,6 +76,7 @@ object TrackerDataModule {
 
 }
 
+/*
 fun OkHttpClient.Builder.ignoreAllSSLErrors(): OkHttpClient.Builder {
     val naiveTrustManager = object : X509TrustManager {
         override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
@@ -91,4 +92,4 @@ fun OkHttpClient.Builder.ignoreAllSSLErrors(): OkHttpClient.Builder {
     sslSocketFactory(insecureSocketFactory, naiveTrustManager)
     hostnameVerifier { _, _ -> true }
     return this
-}
+}*/

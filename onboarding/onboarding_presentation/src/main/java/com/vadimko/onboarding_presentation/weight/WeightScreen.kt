@@ -19,7 +19,7 @@ import com.vadimko.onboarding_presentation.components.UnitTextField
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun WeightScreen(
-    scaffoldState: BottomSheetScaffoldState,
+    scaffoldState: ScaffoldState,
     onNextClick: () -> Unit,
     height: String,
     viewModel: WeightVM = hiltViewModel()
