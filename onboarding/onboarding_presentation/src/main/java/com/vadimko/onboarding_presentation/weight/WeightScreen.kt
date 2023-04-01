@@ -74,23 +74,22 @@ fun WeightScreen(
             modifier = Modifier.align(Alignment.BottomEnd)
         )
         if (!viewModel.bmi.isNullOrEmpty()) {
-           /* val color = when{
+            val color = when {
                 viewModel.bmi!!.toFloat() < 18.5f -> MediumGray
                 viewModel.bmi!!.toFloat() in 18.5f..25.0f -> DarkGreen
-                viewModel.bmi!!.toFloat() in 25.0f..30.0f -> CarbColor
-                viewModel.bmi!!.toFloat() in 30.0f..35.0f -> Orange
+                viewModel.bmi!!.toFloat() in 25.0f..30.0f -> Orange
+                viewModel.bmi!!.toFloat() in 30.0f..35.0f -> MediumFatColor
                 viewModel.bmi!!.toFloat() in 35.0f..40f -> FatColor
                 viewModel.bmi!!.toFloat() > 40 -> MaterialTheme.colors.error
                 else -> MaterialTheme.colors.onPrimary
-            }*/
+            }
             Text(
                 text = stringResource(id = R.string.your_bmi2, viewModel.bmi ?: "-"),
                 modifier = Modifier.align(Alignment.TopStart),
-                color = MaterialTheme.colors.onPrimary,
-                style = MaterialTheme.typography.body2,
+                color = color,
+                style = MaterialTheme.typography.body1,
                 fontWeight = FontWeight.Light
             )
         }
     }
-
 }
